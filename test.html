@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spring  IOC</title>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="搜尋時標題下面的描述"/>
+        <meta name = "author" content="TOM"/>
+        <meta name = "language" content="tw"/>
+        <meta name = "keywords" content="666"/>
+        <meta name = "viewport" content="width = device-width,        initial-scale = 1.0"/>
+        <!--          視(窗)口            寬度     看裝置(PC or phone)   初始縮放比 = 100%  -->
+
+        <meta property="og:title" content="網頁標題" /><!--如果沒有設此標籤，則爬蟲會抓取 <title> 的內容                  float:left -->
+        <meta property="og:image" content="預覽圖 URL" /><!--網址的 url 一定要使用絕對路徑 -->
+        <meta property="og:description" content="描述或摘要" /><!--如果沒有設此標籤，則爬蟲會抓取 <meta content="description"> 標籤中屬性 content 的內容 -->
+        <!--在通訊軟體當道的時代，不管是 line、skype、Telegram 等軟體，在分享網址時都會出現網站標題、縮圖及描述，我們透過去設定 og 可以更準確的說明網頁內容。-->
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <!-- 註解 -->
+        <h1 >
+            <div style="position:fixed;top : 0px;width: 2500px;border: 5px solid rgb(38, 41, 232); background-color:rgb(219, 71, 22);">  <!-- 也可用<pre> 直接排序像是JS的 ``  但我這邊連結太多用同一行太長-->
+                  <a href="https://www.youtube.com/" ><img src="yt.png" style="width: 180px;"/></a>
+                  <input type = "text" placeholder="搜尋內容" style ="position: absolute;top: 20px;right: 400px; width:400px;height: 20px;"/>
+                  <button type="submit" style ="position: absolute;top: 20px;right: 340px;height: 20px;">送出</button>
+                  <a href="login.html" style = "color: black;"><img src = "login_img.png" style="position:absolute;right: 0px; width: 160px;"/></a>
+            </div>
+            <br>
+        </h1>
+        <h2 style="text-align:left;">      <!-- text-align:center=置中 -->          
+        <p>
+            <hr><!--border-radius: 10px 4角變圓弧                opacity: 0-1 透明度-->  
+            <ul style="border-radius: 10px;position:fixed ;top: 140px ;padding : 0px 60px 500px 60px ; float:left; background-color:rgb(236, 177, 95)">
+            <li>列表預覽</li>
+            <li>可只放文字</li>
+            <li>或放連結</li>
+            <li><a href="index.html" style = "color: black;">index  </a></li>
+            <li><a href="web/page2.html" style = "color: black;">page2  </a></li>
+            <li><a href="https://www.youtube.com/" style = "color: black;">youtube</a></li>
+            <li>@Component</li>
+            <li>@Autowired</li>
+            <li>@Qualifier</li>
+            <li>@PostConstruct</li>
+            <li>@Value</li>
+            <li>@Aspect</li>
+            <li>@Before</li>
+            <li>@After</li>
+            <li>@Around</li>
+            <li>@annotation</li>
+         </ul></p>
+        <p style="  padding : 60px 60px 700px 400px">
+            <img src="1c9d1b892bf118dd99d7ba111313d07f1e3a3ccd.png" style="float:right"/>
+            <font size="7">Spring Boot IOC 基礎名詞,用法  ##備忘錄</font><br><br>       <!-- <b>換粗體字  <i>斜體    -->
+                Spring是一個容器  用來存放Bean 可以想成由 Spring 容器所管理的 object <br> 
+                <img src="spring/20151036ubk5DMm0U1.png"> <br><br>
+
+                @Component : 用來標記這個類別是bean  <br>  
+                @Autowired : 說明這裡需要注入bean,但有2點須注意<br>
+                1.首先必須要確保 「自己也是一個 Bean」(即是有在 class 上面加上 @Component)<br>
+                2.並且 @Autowired 是透過 「變數的類型」 來注入 Bean 的<br>
+                <img src="spring/20151036TkaiRM8RZg.png"><br><br>
+                @Qualifier:有多種同類型bean時用來篩選的,一定要搭配 @Autowired 一起使用  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="spring/20151036Tk.png"><br>
+                平常使用 @Component 去創建 Bean 時，這些 Bean 的名字,就會是Class 名的第一個字母轉成小寫,所以記得第一個字母要改成小寫<br><br><br>
+                <font size="6">所謂的「Bean 的初始化」,指的是 「在 Bean 被創建出來之後,對這個 Bean 去做一些初始值的設定」  </font><br>
+                @PostConstruct: 加上 @PostConstruct 的方法中,去初始化 Bean 的值<br>
+                <img src="spring/20151036KQLPotng2H.png" height="424" width="612"><br>
+                使用 @PostConstruct 的注意事項之一：方法有特定格式<br>
+                1.這個方法必須是 public<br>
+                2.這個方法的返回值必須是 void<br>
+                3.這個方法「不能」有參數<br>
+                4.這個方法的名字可以隨意取,不影響 Spring Boot 運作,常見的有 setup、init、initialize 之類的<br>
+                5.在同一個 class 中，建議一次只讓一個方法加上 @PostConstruct<br><br><br><br><br>
+                <br>
+                <font size="6">什麼是 Spring Boot 設定檔？</font><br>
+                指的是「放在 src/main/resources 這個資料夾底下的 applicaiton.properties 檔案」，而他的目的，就是去「存放 Spring Boot 程式的設定值」<br>
+                properties 這個語法 ,是使用 key=value 這樣子的格式來撰寫,「每一行」都是一組 key 和 value 的配對<br>
+                properties 語法的注意事項之一：<br>
+                1.在 = 的前後不需要加上空白鍵排版,只要全部連在一起寫就好，多加空白鍵反而可能有機會導致程式運行出現問題<br>
+                2.key 中的 . 表示「的」的概念,my.name=John<br>
+                3.#可以註解,用法同 Java 中的 // 一樣<br>
+                <img src="spring/properties.png"><br>
+
+                使用 @Value 的注意事項：<br>
+                1.需要遵守固定格式寫法,@Value("${count}")   count可以替換成application.properties檔案中的任意一個key<br>
+                2.只有在 Bean 和 Configuration 中才能生效<br>
+                3.類型需要一致<br>
+                4.可以設定預設值,在 @Value 的 key 的後面,加上一個 :<br>
+                <img src="spring/sssssssss.png"><br>
+                @Value會先去找尋 application.properties 中有沒有這個key,有的話就去讀取那個 key的值到 count1變數中,如果沒有的話,則將 count1變數的值,設定成預設的 200<br>
+
+                其實 Spring Boot 設定檔,是可以使用兩種不同的語法來撰寫的,分別是 properties 和 yml<br>
+                當 Spring Boot 設定檔 「命名成 application.yml」,即是表示他是使用 yml 語法來撰寫,格式則為 key: value<br>
+                不過一份 Spring Boot程式中只能使用一種語法來撰寫, application.properties 和 application.yml 這兩個檔案,他們「不能同時存在」<br><br>
+                也適用key value 的方式來撰寫,注意在 value 前面 「必須」 加上一個空白鍵來隔開 : <br>
+                yml 是使用「縮排」的方式,來表示中文的「的」的概念<br>
+                <img src="spring/ddddddddd.png" height="300" width="800"><br>
+
+
+            <br>
+            <br><br><br>
+        </p>
+        </h2>
+        <a href="index.html" style = "padding : 20px 60px 20px 600px;">  index  </a>
+        <a href="web/page2.html" style = "padding : 20px 60px 20px 600px;">  page2  </a>       <!--margin-top可以填-40PX  會向上移40px位子-->                    
+        
+        <h2 style = "padding : 20px 30px 40px 400px; margin : 20px;">
+            <font size="7" style="text-align:center;"> Spring Boot AOP </font><br><br>
+            AOP 的全稱是 Aspect-Oriented Programming,中文是翻譯成「切面導向程式設計」或是「剖面導向程式設計」
+            <img src="spring/20151036bhtML4qDmh.png"><br>
+            因為我們想要去測量時間,所以就加了很多不相關的程式進去,進而讓這個方法變得很複雜,不利於後續的程式維護<br>
+            如果說我們在 HpPrinter 裡面又多新增了一個方法 printColor(),然後我們也想要去測量這個printColor(),<br>
+            只有這兩個方法要測量時間複製貼上可能還好,但是如果當很多方法都需要測量執行時間的時候,這樣的複製貼上就不會是一個好選項<br><br><br>
+            Spring AOP就提出一個想法了,既然這些測量時間的程式是每個方法都要使用的共同邏輯,那我們就把這些程式獨立出來成一個切面,由這個切面去橫貫所有的方法，替他們做測量時間的部分
+            <img src="spring/201510360jVzj6ewX9.png"><br><br><br><br>
+
+            想要在 Spring Boot 中使用 Spring AOP 的功能的話，首先會需要在 pom.xml 這個檔案裡面新增以下的程式，將 Spring AOP 的功能給載入進來<br><br>
+            &lt;dependency&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;<br>
+            &lt;/dependency&gt;<br><br><br>
+            加完上述的程式之後，在 pom.xml 的右上角會出現一個 M 符號，點擊這個 M 符號，就可以更新這個 Spring Boot 程式，把 Spring AOP 的功能給載入進來<br>
+            -----記得按m-----記得按m-----記得按m-----記得按m-----記得按m-----記得按m-----記得按m-----記得按m-----記得按m-----記得按m<br><br>
+            我們可以先創建一個新的 class 叫做 MyAspect，然後在上面加上 @Aspect，這樣就可以將 MyAspect 變成是一個切面了<br>
+            <img src="spring/20151036IvTX5nMdK0.png"height="300" width="500"><br>
+            在使用切面時，需要「@Component 和 @Aspect 要一起使用」就對了<br><br>
+            @Before: 並且在後面指定想要的切入點，就可以在這個切入點的方法 「執行前」，去執行這個方法 <br>
+            <img src="spring/20151036ASpGGuZ7IR.png"height="300" width="800"><br>
+            1.後面的小括號中的程式，即是去指定「切入點 (Pointcut)」<br>
+            2.前面的註解是 @Before對應的就是切入點方法「執行前」執行<br>
+            確認好「切入點」和「時機點」之後，最後就是在下面的 before() 方法中，去撰寫切面的程式<br>
+
+            Spring AOP 裡面，有三種時機點可以選擇：<br><br>
+
+            @Before：在方法「執行前」執行切面<br>
+            @After：在方法「執行後」執行切面<br>
+            @Around：在方法「執行前」和「執行後」，執行切面<br>
+            <img src="spring/AFTER.png"height="300" width="800">
+            <img src="spring/Around.png"height="350" width="600"><br><br>
+            切入點寫法:<br>
+            1.execution(* com.example.demo.HpPrinter.print())  底下的 print() <br>
+            2.execution(* com.example.demo.HpPrinter.*(..))  &nbsp;&nbsp;&nbsp; 底下的所有方法 <br>
+            3.execution(* com.example.demo.*(..))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            這個 package 中的所有 class 的所有方法<br>
+            4.execution(* com.example.demo..*(..))<br>
+            5.@annotation(com.example.demo.MyAnnotation) 切入點為那些帶有 @MyAnnotation 的方法<br><br><br>
+
+            Spring AOP 以前最常被用在以下三個地方：<br>
+            1.權限驗證<br>
+            2.統一的 Exception 處理<br>
+            3.log 記錄<br>
+            但是由於 Spring Boot 發展逐漸成熟，因此上述這些功能，都已經被封裝成更好用的工具讓我們使用了，所以大家目前已經比較少直接使用 @Aspect 去創建一個切面出來了
+
+
+
+            <br>
+        </h2>
+
+
+
+        
+
+
+    </body>
+
+
+</html>
