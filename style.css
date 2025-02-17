@@ -1,0 +1,10 @@
+h2{
+    background-color: bisque;
+    
+}
+ul a{
+    background-color: rgb(156, 238, 186);
+}
+[href]:hover{  /*+hover 滑鼠移過去才會開始動*/
+    background-color: rgb(195, 122, 33);
+}
